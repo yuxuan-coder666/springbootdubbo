@@ -1,0 +1,9 @@
+HELP.md
+.idea
+*.iml
+dispatch-api.*
+.settings
+.project
+target
+.classpath
+*.log

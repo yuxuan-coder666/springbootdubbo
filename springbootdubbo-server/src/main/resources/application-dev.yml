@@ -1,0 +1,24 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/springbootdubbo?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false
+      username: root
+      password: root
+      
+dubbo:
+  application:
+    name:  springbootdubbo-providor
+  registry:
+    address: 127.0.0.1:2181
+    protocol: zookeeper
+    check: false
+  monitor:
+    protocol: register
+  protocol:
+    name: dubbo
+    port: 20881
+  group: springbootdubbo-dev
+  version: 1.0.0
+

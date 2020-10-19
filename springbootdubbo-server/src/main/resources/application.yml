@@ -1,0 +1,58 @@
+
+server:
+  port: 8080
+  servlet:
+    context-path: /springbootdubbo
+spring:
+  session:
+    store-type: none
+  datasource:
+      name: dataSource
+      type: com.alibaba.druid.pool.DruidDataSource
+      druid:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_NAME:springbootdubbo}?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false
+          username: ${DB_USER:root}
+          password: ${DB_PASSWORD:root}
+          max-active: 100
+          initial-size: 1
+          max-wait: 60000
+          min-idle: 1
+          time-between-eviction-runs-millis: 60000
+          min-evictable-idle-time-millis: 300000
+          validation-query: select 1 from dual
+          test-while-idle: true
+          test-on-borrow: false
+          test-on-return: false
+          pool-prepared-statements: true
+          max-open-prepared-statements: 50
+          max-pool-prepared-statement-per-connection-size: 20
+
+  #profiles:
+    #active: dev
+    
+dubbo:
+  application:
+    name:  springbootdubbo-providor
+  registry:
+    address: 127.0.0.1:2181,127.0.0.1:2182
+    protocol: zookeeper
+    check: false
+  monitor:
+    protocol: register
+  protocol:
+    name: dubbo
+    port: 20880
+  group: springbootdubbo
+  version: 1.0.0
+  
+logback:
+  logdir: springbootdubbo-logs
+  appname: springbootdubbo-server
+
+mybatis:
+   config-locations: classpath:mybatis-config.xml
+   mapper-locations: classpath:com/springbootdubbo/**/mapping/*.xml
+   configuration:
+     map-underscore-to-camel-case: true
+     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
